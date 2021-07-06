@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: 2010-09-09
+​
+​
+Description: |
+  This template launches an EC2 that enables SSH
+Resources:
+  MyEc2:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0ab4d1e9cf9a1215a
+      InstanceType: t2.micro
+      KeyName: ec2_key
+      SecurityGroups:
+        - allow ssh and http
+      Tags:
+        - Key: Name
+          Value: adam-cf-stack-instance
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+​
+          yum update -y
+          amazon-linux-extras install nginx1.12
+          systemctl start nginx
+          cd /usr/share/nginx/html
+          chmod -R 777 /usr/share/nginx/html
+          rm index.html
+          FOLDER="https://raw.githubusercontent.com/ybaslayan/Projects/main/101-kittens-carousel-static-website-ec2/static-web/"
+          wget $FOLDER/index.html
+          wget $FOLDER/cat0.jpg
+          wget $FOLDER/cat1.jpg
+          wget $FOLDER/cat2.jpg
+          wget $FOLDER/cat3.png
+          systemctl restart nginx
+          systemctl enable nginx
