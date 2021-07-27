@@ -1,3 +1,4 @@
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +8,11 @@
     <title>Document</title>
 </head>
 <body>
-    {% if total %}
-    <h2>Total of three numbers is {{ total }}</h2>
-    {% else %}
-    <h2>Since this is GET request, Total hasn't been calculated</h2>
-    {% endif %}
+    <h1>Roma rakami cevirme aparati</h1>
 
+    <form action="/hesap" method="POST">
+        <h3><input type="string" name="romarakami"></h3><br>
+        <button type="submit">Hesapla</button>    
+    </form>
 </body>
 </html>

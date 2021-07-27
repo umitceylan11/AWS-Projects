@@ -33,7 +33,8 @@ def hello():
 # and assign to the route of ('/admin')
 @app.route("/admin")
 def admin():
-    return redirect(url_for('error'))     # import ettik bu fonksiyonlari
+    return redirect(url_for('error'))     # /error sayfasina redirect edilir.
+    return redirect(url_for("error"))
 
 # Create a function named greet which return formatted inline html string 
 # and assign to the dynamic route of ('/<name>')
@@ -90,5 +91,5 @@ def evens():
 
 # run this app in debug mode on your local. Do not forget to change debug mode to publish mode before you push to the Github repo
 if __name__ == "__main__":
-    #app.run(debug = True)
+    # app.run(debug = True)
     app.run(host = "0.0.0.0", port=80)
