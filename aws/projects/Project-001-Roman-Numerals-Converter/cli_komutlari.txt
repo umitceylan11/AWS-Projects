@@ -1,0 +1,19 @@
+aws --version : cli/python kurulu mu 
+aws configure : konsola kendimizi tanitiriz. (onceden tanimli degilse)
+aws sts get-caller-identity --query Account --output text  : configure edilmisse account numaramizi verir.
+aws ec2 create-security-group \              : security group olusturma
+    --group-name roman_numbers_sec_grpp \
+    --description "This Sec Group is to allow ssh and http from anywhere"
+aws ec2 describe-security-groups --group-names roman_numbers_sec_grpp : sec grubun bilgilerini verir.
+aws ec2 authorize-security-group-ingress \   : 22 portunu tanittik.
+    --group-name roman_numbers_sec_grpp \
+    --protocol tcp \
+    --port 22 \
+    --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress \   : 80 portunu tanittik.
+    --group-name roman_numbers_sec_grpp \
+    --protocol tcp \
+    --port 80 \
+    --cidr 0.0.0.0/0
+curl https://checkip.amazonaws.com  : ec2/local'in public ip'sini verir.
+aws ec2 describe-security-groups --group-names roman_numbers_sec_grpp : sec grubun bilgilerini verir.
