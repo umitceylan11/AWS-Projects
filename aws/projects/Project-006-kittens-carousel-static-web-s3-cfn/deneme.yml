@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  practice
+Parameters:
+  MyDomainName:
+    Description: 
+    Type: AWS::Route53::HostedZone::Id
+  MyFullDomainName:
+    Description: 
+    Type: String
+    Default: www.umitdewopsaws.com
+    AllowedPattern: (?!-)[a-zA-Z0-9-.]{1,63}(?<!-)
+    
+Resources:
+  Mys3Bucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      AccessControl: PublicRead
+      BucketName: !Ref MyFullDomainName
+      WebsiteConfiguration: 
+        IndexDocument: index.html
+ 
+  MyBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref Mys3Bucket # Required
+      PolicyDocument: # Required
+        Statement:
+          - Action: s3:GetObject
+            Effect: Allow 
+            Resource: !Join ['', ['arn:aws:s3:::', !Ref 'KittensBucket', /*]]
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref DOC-EXAMPLE-BUCKET
+                - /*
+            Principal: '*'
+            
+MyCertificate:
+  Type: AWS::CertificateManager::Certificate
+  Properties:
+    CertificateTransparencyLoggingPreference: "String"
+    DomainName: "String" # Required
+    DomainValidationOptions:
+      DomainValidationOptions
+    SubjectAlternativeNames:
+      SubjectAlternativeNames
+    Tags:
+      Tags
+    ValidationMethod: "String"
+
+
+
+
+Outputs:
