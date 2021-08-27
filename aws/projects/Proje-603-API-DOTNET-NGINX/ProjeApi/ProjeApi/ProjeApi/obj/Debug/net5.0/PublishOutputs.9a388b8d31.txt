@@ -1,0 +1,6 @@
+/Users/seyho/Desktop/Api/ProjeApi/ProjeApi/TesProjeApi/appsettings.Development.json
+/Users/seyho/Desktop/Api/ProjeApi/ProjeApi/TesProjeApi/appsettings.json
+/Users/seyho/Desktop/Api/ProjeApi/ProjeApi/TesProjeApi/ProjeApi.dll
+/Users/seyho/Desktop/Api/ProjeApi/ProjeApi/TesProjeApi/ProjeApi.deps.json
+/Users/seyho/Desktop/Api/ProjeApi/ProjeApi/TesProjeApi/ProjeApi.runtimeconfig.json
+/Users/seyho/Desktop/Api/ProjeApi/ProjeApi/TesProjeApi/ProjeApi.pdb

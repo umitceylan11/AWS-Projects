@@ -1,0 +1,69 @@
+DOTNET
+
+Controllers: Backhand
+View: Fronthand
+appsettings: RDS configurasasyonlari yapilir.
+
+1.Deployment:
+Serverin anlamasi icin publish ederiz. Server ile Dotnetin konfigurasyonu tamamlanmis olur.
+> Build > publish the folder
+>dotnet publish -o /home/ubuntu/TestProje  # Proje dosyasini icindeyken belitilen konuma publish ederiz.
+
+VSC:
+>sudo apt update -y
+>sudo apt upgrade -y
+>wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb  # microsoft paket indirme programini indirdik.
+>sudo dpkg -i packages-microsoft-prod.deb     # microsoft paket indirme programini yukledik.          
+>rm packages-microsoft-prod.deb        # yukledikten sonra indirilen paketi sildik.
+>sudo apt-get update; \                                # sdk dahil indirdik.
+  sudo apt-get install -y apt-transport-https && \     # redirect 80 443 e
+  sudo apt-get update && \
+  sudo apt-get install -y dotnet-sdk-5.0
+>dotnet --version
+>sudo apt-get install nginx
+>sudo service nginx start
+>sudo service nginx status           # running goruruz.
+>sudo vim /etc/nginx/sites-available/default               # Configurasyon dosyasina asagiyi yazariz geri kalan silinir. Locali 80 portuna redirect ediyoruz.
+---------------------------------------
+server {
+    listen        80;
+    server_name   example.com *.example.com;                 # kullanmiyorsak sileriz.
+    location / {
+        proxy_pass         http://127.0.0.1:5000;
+        proxy_http_version 1.1;
+        proxy_set_header   Upgrade $http_upgrade;
+        proxy_set_header   Connection keep-alive;
+        proxy_set_header   Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+    }
+}
+---------------------------------------
+>sudo nginx -t            # start
+>sudo nginx -s reload     # ilgili dizinde serveri tekrar calistirin.
+>sudo service nginx start  # yukarki baslatma komutuna alternatiftir.
+>cd TestProje/
+>sudo chmod u+x TestNetCore.dll   # execute icin
+>ls
+>dotnet TestNetCore.dll           #   debug ediyoruz. hem 80 hem de localden calisir. ama kapatinca calismaz.
+>sudo vim /etc/systemd/system/TestProje.service     # sistem dosyasini olusturma. otomatik baslamasi icin.
+--------------------------------------
+[Unit]
+Description=My first .NET Core application on Ubuntu
+[Service]
+WorkingDirectory=/home/ubuntu/TestProje                                 # adresi tanimladik
+ExecStart=/usr/bin/dotnet /home/ubuntu/TestProje/TestNetCore.dll        # once dotneti calistirdi. Sonra calisacak dotnet dosyani adresini calistirdi.
+Restart=always
+RestartSec=10 # Restart service after 10 seconds if dotnet service crashes
+SyslogIdentifier=offershare-web-app
+Environment=ASPNETCORE_ENVIRONMENT=Production
+[Install]
+WantedBy=multi-user.target
+-----------------------------------------
+>sudo systemctl enable netcore.service
+>sudo systemctl start netcore.service
+>sudo systemctl status netcore.service
+
+Browser:
+- IP ile kontrol edilir.

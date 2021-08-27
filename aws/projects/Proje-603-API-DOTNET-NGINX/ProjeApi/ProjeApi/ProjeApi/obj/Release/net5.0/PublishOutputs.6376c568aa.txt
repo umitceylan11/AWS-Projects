@@ -1,0 +1,6 @@
+/Users/seyho/Downloads/ApiTestProje/appsettings.Development.json
+/Users/seyho/Downloads/ApiTestProje/appsettings.json
+/Users/seyho/Downloads/ApiTestProje/ProjeApi.dll
+/Users/seyho/Downloads/ApiTestProje/ProjeApi.deps.json
+/Users/seyho/Downloads/ApiTestProje/ProjeApi.runtimeconfig.json
+/Users/seyho/Downloads/ApiTestProje/ProjeApi.pdb

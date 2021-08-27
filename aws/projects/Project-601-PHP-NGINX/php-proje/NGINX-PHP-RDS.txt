@@ -1,0 +1,66 @@
+1.beni_oku.txt ac
+
+2.RDS:
+- RDS olustur.
+- Port 3306 olsa da ihtiyac developerlar isterse baska port tanimla.
+
+3.SQL Client:
+- RDS'e DBeaver clientten baglanilarak test edilir ve ilk yuklemeler yapilir. 
+- Eger instance'a yuklu olsa idi VSC'den mysql -u username (-p) ile baglanilirdi.
+> New database connection > MySQL > db ismi/endpoint veya IP adresi veya localhost - 3306/
+  > kullanici ismi > password > baglan
+> db > tables > SQL > pencereye (Proje/Veritabani/telefon.sql) yapistir. 
+  > SQL'i calistir. > Kisi tablosu olustu.
+> db > tables > kisi > asagisa "+" tikla > tabloya veri girisi yapilabilir.
+
+4.VSC:
+- baglan.php dosyasindaki SQL configurasyonu yapilir. (beni_oku.txt de belirtili)
+- Host:
+  - RDS ise endpoint, 
+  - instance'a yuklu SQL ise public IP, 
+  - ayni bilgisayara SQL yuklenirse "LocalHost: 3306" yazilir.
+- kullanici adi: 
+  - RDS ise ilk kurulumda kaydet.
+  - Instance'a veya locale yuklenirse yuklendikten sonra SQL client programi ile girerek user, db ve password olustur.  
+ 
+5.Web Server Instance:
+- php.sh dosyasinda Userdatayi olusturduk.
+- User data ile Nginx, PHP yuklenir. 
+- Git clone ile ilgili dosya cekilir.
+- Default nginx index dosyasi silinir.
+---------------------
+#!/bin/bash
+
+apt update -y 
+apt upgrade -y
+apt install git -y
+apt install php7.4 php7.4-fpm -y 
+apt install nginx -y
+TOKEN="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"
+git clone https://$TOKEN@github.com/muhammetguzel/php-proje
+rm -rf /var/www/html/index.nginx-debian.html    # "-rf" force to remove
+cd /home/ubuntu/php-proje     # 
+cp -r * /var/www/html # "-r" folderlar dahil kopyala
+--------------------------------------------
+
+6.VSC:
+- PHP, nod.js vb programlarin Nginx ile irtibati icin configurasyon dosyasina girer ve ilgili 
+program icin ayrilan yerden "#" isaretini degistirir ve ilgili PHP versiyon farki varsa 
+degistirir ve kaydederiz.
+>sudo vim /etc/nginx/sites-available/default  # Nginx'in configurasyon dosyasi 
+---------------------------
+index.php # eklenir index dosyasi olarak bunu acsin diye. 
+
+# pass PHP scripts to FastCGI server
+#
+location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+#
+#       # With php-fpm (or other unix sockets):
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+#       # With php-cgi (or other tcp sockets):
+#       fastcgi_pass 127.0.0.1:9000;
+}
+-------------------------------
+7.Browser:
+> Instance IP ile webservere baglaniriz > site - girisKontrol'den kullanici adi sifreyi kullaniriz.

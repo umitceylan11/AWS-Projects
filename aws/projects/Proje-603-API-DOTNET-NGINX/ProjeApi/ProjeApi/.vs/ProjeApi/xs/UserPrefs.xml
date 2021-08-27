@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{F88DDB93-ECFE-48EA-9EAC-EB23711396EF}|Default">
+  <MonoDevelop.Ide.ItemProperties.ProjeApi PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjeApi/Controllers/WeatherForecastController.cs">
+    <Files>
+      <File FileName="ProjeApi/Controllers/WeatherForecastController.cs" Line="27" Column="40" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ProjeApi" expanded="True">
+            <Node name="ProjeApi" expanded="True">
+              <Node name="Properties" expanded="True">
+                <Node name="launchSettings.json" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

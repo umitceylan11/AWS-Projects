@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/Users/seyho/.dotnet/store/|arch|/|tfm|",
+      "/Users/seyho/.nuget/packages"
+    ]
+  }
+}
